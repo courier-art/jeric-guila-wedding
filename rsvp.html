@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP - Guila & Jeric</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">G&J</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="story.html">Our Story</a></li>
+                <li><a href="bigday.html">The Big Day</a></li>
+                <li><a href="nuptials.html">Nuptials</a></li>
+                <li><a href="greetings.html">Wish Greetings</a></li>
+                <li><a href="rsvp.html" class="active">RSVP</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content page-transition">
+                <h1>RSVP</h1>
+                <p class="subtitle">Please respond by August 5, 2026</p>
+                
+                <div class="rsvp-form-container">
+                    <form id="rsvpForm">
+                        <!-- Personal Information -->
+                        <div class="form-group">
+                            <label class="form-label" for="fullName">Full Name *</label>
+                            <input type="text" class="form-control" id="fullName" name="fullName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone">
+                        </div>
+                        
+                        <!-- Attendance -->
+                        <div class="form-group">
+                            <label class="form-label">Will you be attending? *</label>
+                            <div style="display: flex; gap: 2rem; margin-top: 1rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="radio" name="attendance" value="yes" required>
+                                    <span>Yes, I'll be there!</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="radio" name="attendance" value="no" required>
+                                    <span>No, I can't make it</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Number of Guests -->
+                        <div class="form-group">
+                            <label class="form-label" for="guests">Number of Guests *</label>
+                            <select class="form-control" id="guests" name="guests" required>
+                                <option value="">Select number</option>
+                                <option value="1">1 (Just me)</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5 or more</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Guest Names -->
+                        <div class="form-group" id="guestNamesContainer" style="display: none;">
+                            <label class="form-label">Guest Names</label>
+                            <div id="guestNamesInputs">
+                                <!-- Dynamic inputs will be added here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Events Attending -->
+                        <div class="form-group">
+                            <label class="form-label">Which events will you attend?</label>
+                            <div style="margin-top: 1rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                    <input type="checkbox" name="events" value="ceremony">
+                                    <span>Wedding Ceremony (2:00 PM)</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" name="events" value="reception">
+                                    <span>Reception (5:00 PM)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Dietary Restrictions -->
+                        <div class="form-group">
+                            <label class="form-label" for="dietary">Dietary Restrictions</label>
+                            <textarea class="form-control" id="dietary" name="dietary" rows="3" placeholder="Please list any dietary restrictions or allergies"></textarea>
+                        </div>
+                        
+                        <!-- Song Request -->
+                        <div class="form-group">
+                            <label class="form-label" for="song">Song Request</label>
+                            <input type="text" class="form-control" id="song" name="song" placeholder="Request a song for the reception dance floor">
+                        </div>
+                        
+                        <!-- Message -->
+                        <div class="form-group">
+                            <label class="form-label" for="message">Message for the Couple</label>
+                            <textarea class="form-control" id="message" name="message" rows="4" placeholder="Share your well wishes or memories"></textarea>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn">Submit RSVP</button>
+                        </div>
+                        
+                        <p style="text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--gray-dark);">
+                            * Required fields
+                        </p>
+                    </form>
+                </div>
+                
+                <!-- FAQ Section -->
+                <div style="margin: 4rem 0; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <h2 style="text-align: center;">Frequently Asked Questions</h2>
+                    
+                    <div style="margin-top: 2rem;">
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-medium);">
+                            <h3>When should I RSVP by?</h3>
+                            <p>Please RSVP by August 5, 2026 so we can finalize our arrangements.</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-medium);">
+                            <h3>Can I bring a plus one?</h3>
+                            <p>Your invitation will specify if a plus one is included. Please check your invitation details.</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-medium);">
+                            <h3>What is the dress code?</h3>
+                            <p>Elegant black attire. Please see "The Big Day" page for more details.</p>
+                        </div>
+                        
+                        <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-medium);">
+                            <h3>Is there parking available?</h3>
+                            <p>Yes, both venues have parking available. Valet service will be provided at the reception.</p>
+                        </div>
+                        
+                        <div>
+                            <h3>Who should I contact with questions?</h3>
+                            <p>Please contact Guila at +63 912 345 6789 or Jeric at +63 987 654 3210.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Guila & Jeric</h3>
+                    <p>September 5, 2026</p>
+                    <p>Kawit & Noveleta, Cavite</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="story.html">Our Love Story</a></li>
+                        <li><a href="bigday.html">Event Details</a></li>
+                        <li><a href="nuptials.html">Wedding Party</a></li>
+                        <li><a href="greetings.html">Wish Greetings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>For any questions, please contact:</p>
+                    <p>Guila: +63 912 345 6789</p>
+                    <p>Jeric: +63 987 654 3210</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Guila & Jeric Wedding. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Dynamic guest name inputs
+        const guestsSelect = document.getElementById('guests');
+        const guestNamesContainer = document.getElementById('guestNamesContainer');
+        const guestNamesInputs = document.getElementById('guestNamesInputs');
+        
+        guestsSelect.addEventListener('change', function() {
+            const numGuests = parseInt(this.value);
+            guestNamesInputs.innerHTML = '';
+            
+            if (numGuests > 1) {
+                guestNamesContainer.style.display = 'block';
+                
+                for (let i = 2; i <= numGuests; i++) {
+                    const div = document.createElement('div');
+                    div.style.marginBottom = '0.5rem';
+                    div.innerHTML = `
+                        <input type="text" class="form-control" 
+                               name="guest${i}" 
+                               placeholder="Full name of guest ${i}">
+                    `;
+                    guestNamesInputs.appendChild(div);
+                }
+            } else {
+                guestNamesContainer.style.display = 'none';
+            }
+        });
+        
+        // Form submission handling
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Log data (in production, send to Google Apps Script)
+            console.log('RSVP Data:', data);
+            
+            // For Google Apps Script integration:
+            // Replace with your actual Google Apps Script URL
+            const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+            
+            // Show success message
+            alert('Thank you for your RSVP! We look forward to celebrating with you.');
+            this.reset();
+            guestNamesContainer.style.display = 'none';
+            
+            // In production, uncomment and configure this:
+            /*
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                alert('Thank you for your RSVP! We look forward to celebrating with you.');
+                this.reset();
+                guestNamesContainer.style.display = 'none';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your RSVP. Please try again.');
+            });
+            */
+        });
+    </script>
+</body>
+</html>
