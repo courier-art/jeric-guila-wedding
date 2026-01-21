@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wish Greetings - Guila & Jeric</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">G&J</a>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="story.html">Our Story</a></li>
+                <li><a href="bigday.html">The Big Day</a></li>
+                <li><a href="nuptials.html">Nuptials</a></li>
+                <li><a href="greetings.html" class="active">Wish Greetings</a></li>
+                <li><a href="rsvp.html">RSVP</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content page-transition">
+                <h1>Wish Greetings</h1>
+                <p class="subtitle">Leave a message for the newlyweds</p>
+                
+                <!-- Message Form -->
+                <div style="max-width: 600px; margin: 3rem auto; padding: 3rem; border: 1px solid var(--gray-medium);">
+                    <h2 style="text-align: center; margin-bottom: 2rem;">Send Your Wishes</h2>
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Your Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="message">Your Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="submit" class="btn">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Messages Grid -->
+                <h2 style="text-align: center; margin-top: 4rem;">Messages from Friends & Family</h2>
+                <div class="messages-grid">
+                    <!-- Sample Messages -->
+                    <div class="message-card">
+                        <div class="message-author">Maria Santos</div>
+                        <div class="message-date">June 15, 2024</div>
+                        <p>So happy for both of you! Wishing you a lifetime of love and happiness. Can't wait to celebrate with you!</p>
+                    </div>
+                    
+                    <div class="message-card">
+                        <div class="message-author">Michael Reyes</div>
+                        <div class="message-date">June 12, 2024</div>
+                        <p>Congratulations! May your marriage be filled with all the right ingredients: a heap of love, a dash of humor, a touch of romance, and a spoonful of understanding.</p>
+                    </div>
+                    
+                    <div class="message-card">
+                        <div class="message-author">Sarah & David Cruz</div>
+                        <div class="message-date">June 10, 2024</div>
+                        <p>Wishing you both all the happiness in the world as you begin this new chapter together. We're so excited to witness your special day!</p>
+                    </div>
+                    
+                    <div class="message-card">
+                        <div class="message-author">The Torres Family</div>
+                        <div class="message-date">June 8, 2024</div>
+                        <p>To the beautiful couple - may your love continue to grow with each passing day. Congratulations on finding your forever person!</p>
+                    </div>
+                    
+                    <div class="message-card">
+                        <div class="message-author">James Lopez</div>
+                        <div class="message-date">June 5, 2024</div>
+                        <p>So proud of you both! Wishing you a marriage as wonderful as your friendship has been all these years.</p>
+                    </div>
+                    
+                    <div class="message-card">
+                        <div class="message-author">Anna Gonzales</div>
+                        <div class="message-date">June 3, 2024</div>
+                        <p>Your love story has been so inspiring to watch unfold. May your wedding day be just the beginning of a lifetime filled with wonderful moments.</p>
+                    </div>
+                    
+                    <!-- More messages will be added dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Guila & Jeric</h3>
+                    <p>September 5, 2026</p>
+                    <p>Kawit & Noveleta, Cavite</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="story.html">Our Love Story</a></li>
+                        <li><a href="bigday.html">Event Details</a></li>
+                        <li><a href="nuptials.html">Wedding Party</a></li>
+                        <li><a href="rsvp.html">RSVP</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>For any questions, please contact:</p>
+                    <p>Guila: +63 912 345 6789</p>
+                    <p>Jeric: +63 987 654 3210</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Guila & Jeric Wedding. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
