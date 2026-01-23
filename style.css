@@ -186,51 +186,8 @@ p {
     margin-bottom: 1.5rem;
 }
 
-.bell-container {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    margin: 2rem auto;
-}
 
-.bell {
-    width: 60px;
-    height: 60px;
-    background-color: var(--black);
-    border-radius: 50%;
-    position: relative;
-    margin: 0 auto;
-    animation: ring 3s infinite;
-    cursor: pointer;
 }
-
-.bell:before {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 30px;
-    background-color: var(--black);
-    top: -30px;
-    left: 20px;
-}
-
-.bell:after {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: var(--white);
-    border-radius: 50%;
-    top: 15px;
-    left: 25px;
-}
-
-@keyframes ring {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(10deg); }
-    75% { transform: rotate(-10deg); }
-}
-
 .countdown {
     margin: 3rem 0;
     text-align: center;

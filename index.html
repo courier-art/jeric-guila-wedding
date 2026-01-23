@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -34,18 +35,24 @@
                 <h1>Guila & Jeric</h1>
                 <p class="subtitle">September 5, 2026</p>
                 
-                <!-- Classroom Setup -->
-                <div class="classroom-setup">
-                    <h2>Waiting for the Bell to Ring</h2>
-                    <p>Just like our high school days, waiting for the bell that signals recess or the end of class...</p>
-                    <p>Now we're waiting for another bell - one that will mark the beginning of our forever together.</p>
-                    
-                    <div class="bell-container">
-                        <div class="bell" title="Click to ring the bell!"></div>
-                    </div>
-                    
-                    <p><em>Click the bell above to hear our wedding bell chime!</em></p>
-                </div>
+         
+<!-- Classroom Setup Section -->
+<div class="classroom-setup">
+    <h2>Waiting for the Church Bell to Ring</h2>
+    <p>Just like waiting for the school bell that signals a new chapter...</p>
+    <p>Now we await the church bell that will announce the beginning of our lifelong journey together.</p>
+    
+<!-- Lordicon Animated Bell -->
+<lord-icon
+    id="weddingBell"
+    src="https://cdn.lordicon.com/qtpaiyhf.json"
+    trigger="in"
+    delay="150"
+    state="in-bell"
+    style="width:250px;height:250px;cursor:pointer">
+</lord-icon>
+    <p class="bell-instruction">⛪ Click the bell to ring it for our wedding! 🔔</p>
+</div>
                 
                 <!-- Countdown Timer -->
                 <div class="countdown">
@@ -115,5 +122,8 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <script src="bell.js"></script>
+
 </body>
 </html>

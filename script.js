@@ -66,17 +66,6 @@ if (document.querySelector('.countdown-container')) {
     setInterval(updateCountdown, 1000);
 }
 
-// Bell Animation
-const bell = document.querySelector('.bell');
-bell?.addEventListener('click', function() {
-    this.style.animation = 'none';
-    setTimeout(() => {
-        this.style.animation = 'ring 0.5s ease';
-        // Play bell sound if available
-        const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-school-bell-789.mp3');
-        audio.play().catch(e => console.log('Audio play failed:', e));
-    }, 10);
-});
 
 // RSVP Form Submission
 const rsvpForm = document.getElementById('rsvpForm');
