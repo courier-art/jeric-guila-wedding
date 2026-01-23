@@ -196,7 +196,7 @@ p {
 .bell {
     width: 60px;
     height: 60px;
-    background-color: var(--black);
+    background-color: var(--red);
     border-radius: 50%;
     position: relative;
     margin: 0 auto;
@@ -209,7 +209,7 @@ p {
     position: absolute;
     width: 20px;
     height: 30px;
-    background-color: var(--black);
+    background-color: var(--red);
     top: -30px;
     left: 20px;
 }
@@ -219,7 +219,7 @@ p {
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: var(--white);
+    background-color: var(--gold);
     border-radius: 50%;
     top: 15px;
     left: 25px;
