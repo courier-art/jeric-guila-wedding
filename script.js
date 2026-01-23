@@ -66,17 +66,50 @@ if (document.querySelector('.countdown-container')) {
     setInterval(updateCountdown, 1000);
 }
 
-// Bell Animation
+// Enhanced Bell Animation
 const bell = document.querySelector('.bell');
-bell?.addEventListener('click', function() {
-    this.style.animation = 'none';
-    setTimeout(() => {
-        this.style.animation = 'ring 0.5s ease';
-        // Play bell sound if available
-        const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-school-bell-789.mp3');
-        audio.play().catch(e => console.log('Audio play failed:', e));
-    }, 10);
-});
+if (bell) {
+    bell.addEventListener('click', function() {
+        // Reset animation
+        this.style.animation = 'none';
+        
+        // Add active class for visual feedback
+        this.classList.add('ringing');
+        
+        // Play enhanced animation
+        setTimeout(() => {
+            this.style.animation = 'ring3d 0.8s ease';
+            
+            // Play bell sound
+            const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-school-bell-789.mp3');
+            audio.volume = 0.7;
+            audio.play().catch(e => console.log('Audio play failed:', e));
+            
+            // Add visual effects
+            const container = document.querySelector('.bell-container');
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple-effect';
+            container.appendChild(ripple);
+            
+            // Remove ripple after animation
+            setTimeout(() => {
+                ripple.remove();
+                this.classList.remove('ringing');
+            }, 1000);
+            
+        }, 10);
+    });
+    
+    // Add hover effect
+    bell.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1)';
+        this.style.transition = 'transform 0.3s ease';
+    });
+    
+    bell.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+    });
+}
 
 // RSVP Form Submission
 const rsvpForm = document.getElementById('rsvpForm');
