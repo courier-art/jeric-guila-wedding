@@ -66,51 +66,239 @@ if (document.querySelector('.countdown-container')) {
     setInterval(updateCountdown, 1000);
 }
 
-// Enhanced Bell Animation
-const bell = document.querySelector('.bell');
-if (bell) {
-    bell.addEventListener('click', function() {
-        // Reset animation
-        this.style.animation = 'none';
+// Realistic Church Bell Interaction
+function initializeChurchBell() {
+    const bellAssembly = document.querySelector('.bell-assembly');
+    const clapper = document.querySelector('.clapper');
+    const bellScene = document.querySelector('.bell-scene');
+    const bellBody = document.querySelector('.bell-body');
+    
+    if (!bellAssembly) return;
+    
+    // Store original animations
+    const originalBellAnim = bellAssembly.style.animation;
+    const originalClapperAnim = clapper.style.animation;
+    
+    // Create sound pool for realistic audio
+    const bellSounds = [
+        'https://assets.mixkit.co/sfx/preview/mixkit-big-church-bell-announcement-746.mp3',
+        'https://assets.mixkit.co/sfx/preview/mixkit-church-bell-toll-599.mp3',
+        'https://assets.mixkit.co/sfx/preview/mixkit-church-bell-ding-570.mp3'
+    ];
+    
+    let currentSoundIndex = 0;
+    
+    // Preload audio
+    const audioElements = bellSounds.map(src => {
+        const audio = new Audio(src);
+        audio.preload = 'auto';
+        return audio;
+    });
+    
+    // Click to ring the bell
+    bellAssembly.addEventListener('click', function(e) {
+        e.stopPropagation();
+        ringBell();
+    });
+    
+    // Also allow clicking on bell body
+    bellBody.addEventListener('click', function(e) {
+        e.stopPropagation();
+        ringBell();
+    });
+    
+    function ringBell() {
+        // Stop current animations
+        bellAssembly.style.animation = 'none';
+        clapper.style.animation = 'none';
         
-        // Add active class for visual feedback
-        this.classList.add('ringing');
+        // Force reflow
+        void bellAssembly.offsetWidth;
+        void clapper.offsetWidth;
         
-        // Play enhanced animation
+        // Add intensive ringing effects
+        bellAssembly.classList.add('ringing', 'vibrating');
+        clapper.classList.add('hitting');
+        bellScene.classList.add('active');
+        
+        // Create multiple sound waves
+        createSoundWaves();
+        
+        // Add visual impact effect
+        createVisualImpact();
+        
+        // Play realistic church bell sound
+        playChurchBellSound();
+        
+        // Gradually fade out effects
         setTimeout(() => {
-            this.style.animation = 'ring3d 0.8s ease';
+            clapper.classList.remove('hitting');
+            bellScene.classList.remove('active');
+        }, 300);
+        
+        setTimeout(() => {
+            bellAssembly.classList.remove('vibrating');
+        }, 1500);
+        
+        setTimeout(() => {
+            bellAssembly.classList.remove('ringing');
             
-            // Play bell sound
-            const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-school-bell-789.mp3');
-            audio.volume = 0.7;
-            audio.play().catch(e => console.log('Audio play failed:', e));
-            
-            // Add visual effects
-            const container = document.querySelector('.bell-container');
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple-effect';
-            container.appendChild(ripple);
-            
-            // Remove ripple after animation
+            // Restore gentle swinging animation
             setTimeout(() => {
-                ripple.remove();
-                this.classList.remove('ringing');
-            }, 1000);
-            
-        }, 10);
-    });
+                bellAssembly.style.animation = originalBellAnim;
+                clapper.style.animation = originalClapperAnim;
+            }, 100);
+        }, 2000);
+    }
     
-    // Add hover effect
-    bell.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.1)';
+    function createSoundWaves() {
+        const waveCount = 5;
+        const waveDelay = 150;
+        
+        for (let i = 0; i < waveCount; i++) {
+            setTimeout(() => {
+                const wave = document.createElement('div');
+                wave.className = 'sound-wave';
+                wave.style.animationDelay = `${i * 0.2}s`;
+                bellScene.appendChild(wave);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    if (wave.parentNode) {
+                        wave.parentNode.removeChild(wave);
+                    }
+                }, 2000);
+            }, i * waveDelay);
+        }
+    }
+    
+    function createVisualImpact() {
+        // Add a flash of light on the bell
+        const flash = document.createElement('div');
+        flash.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            animation: flashEffect 0.3s ease-out;
+        `;
+        
+        // Add flash animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes flashEffect {
+                0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+                50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        bellScene.appendChild(flash);
+        
+        // Remove flash element
+        setTimeout(() => {
+            if (flash.parentNode) {
+                flash.parentNode.removeChild(flash);
+            }
+            if (style.parentNode) {
+                style.parentNode.removeChild(style);
+            }
+        }, 300);
+    }
+    
+    function playChurchBellSound() {
+        // Cycle through different bell sounds
+        const audio = audioElements[currentSoundIndex];
+        
+        // Reset audio if it's still playing
+        audio.currentTime = 0;
+        
+        // Play with realistic volume
+        audio.volume = 0.8;
+        
+        // Add slight random pitch variation for realism
+        audio.playbackRate = 0.9 + Math.random() * 0.2;
+        
+        audio.play().catch(e => {
+            console.log('Audio play failed:', e);
+            // Fallback to simpler sound if needed
+            const fallbackAudio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-bell-notification-933.mp3');
+            fallbackAudio.volume = 0.7;
+            fallbackAudio.play();
+        });
+        
+        // Move to next sound for next ring
+        currentSoundIndex = (currentSoundIndex + 1) % audioElements.length;
+    }
+    
+    // Hover effects for realism
+    bellAssembly.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateX(-50%) scale(1.02)';
         this.style.transition = 'transform 0.3s ease';
+        
+        // Enhance shine on hover
+        const shine = document.querySelector('.bell-shine');
+        const highlight = document.querySelector('.bell-highlight');
+        
+        if (shine) shine.style.opacity = '0.4';
+        if (highlight) highlight.style.opacity = '0.3';
     });
     
-    bell.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
+    bellAssembly.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateX(-50%) scale(1)';
+        
+        // Reset shine
+        const shine = document.querySelector('.bell-shine');
+        const highlight = document.querySelector('.bell-highlight');
+        
+        if (shine) shine.style.opacity = '0.3';
+        if (highlight) highlight.style.opacity = '0.2';
+    });
+    
+    // Add subtle mouse move parallax effect
+    bellScene.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
+        
+        bellAssembly.style.transform = `translateX(-50%) rotateY(${x}deg) rotateX(${-y}deg)`;
+    });
+    
+    bellScene.addEventListener('mouseleave', function() {
+        bellAssembly.style.transform = 'translateX(-50%)';
     });
 }
 
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializeChurchBell();
+    
+    // Add some initial sound waves for visual interest
+    setTimeout(() => {
+        const bellScene = document.querySelector('.bell-scene');
+        if (bellScene) {
+            for (let i = 0; i < 3; i++) {
+                const wave = document.createElement('div');
+                wave.className = 'sound-wave';
+                wave.style.animationDelay = `${i * 0.5}s`;
+                bellScene.appendChild(wave);
+                
+                setTimeout(() => {
+                    if (wave.parentNode) {
+                        wave.parentNode.removeChild(wave);
+                    }
+                }, 2000);
+            }
+        }
+    }, 1000);
+});
 // RSVP Form Submission
 const rsvpForm = document.getElementById('rsvpForm');
 if (rsvpForm) {
