@@ -186,142 +186,645 @@ p {
     margin-bottom: 1.5rem;
 }
 
-.bell-container {
+/* ========== REALISTIC CHURCH BELL ========== */
+.bell-scene {
     position: relative;
-    width: 120px;
-    height: 120px;
-    margin: 2rem auto;
-    perspective: 1000px;
+    width: 300px;
+    height: 400px;
+    margin: 4rem auto;
+    perspective: 1200px;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
 }
 
-.bell {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(145deg, #ff0000, #cc0000); /* Red gradient */
-    border-radius: 50% 50% 40% 40%;
-    position: relative;
-    margin: 0 auto;
-    animation: ring3d 3s infinite ease-in-out;
-    cursor: pointer;
-    box-shadow: 
-        0 10px 20px rgba(255, 0, 0, 0.3),
-        inset 0 5px 15px rgba(255, 255, 255, 0.4),
-        inset 0 -5px 15px rgba(0, 0, 0, 0.4);
-    transform-style: preserve-3d;
-    perspective: 500px;
-}
-
-.bell:before {
-    content: '';
+/* Bell Tower/Structure */
+.bell-tower {
     position: absolute;
-    width: 15px;
-    height: 25px;
-    background: linear-gradient(to bottom, #8B0000, #660000);
-    top: -25px;
-    left: 32.5px;
-    border-radius: 8px 8px 0 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-.bell:after {
-    content: '';
-    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 20px;
-    height: 30px;
-    background: linear-gradient(to bottom, #FFD700, #DAA520);
+    height: 150px;
+    background: linear-gradient(to right, 
+        #8B7355 0%, 
+        #A0522D 30%, 
+        #8B4513 70%, 
+        #654321 100%
+    );
     border-radius: 10px;
-    top: 30px;
-    left: 30px;
-    animation: clapper 1s infinite alternate ease-in-out;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    box-shadow: 
+        inset 0 0 10px rgba(0, 0, 0, 0.5),
+        0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes ring3d {
-    0%, 100% { 
-        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); 
-    }
-    25% { 
-        transform: rotateX(5deg) rotateY(5deg) rotateZ(10deg);
-        box-shadow: 
-            0 15px 25px rgba(255, 0, 0, 0.4),
-            inset 0 5px 15px rgba(255, 255, 255, 0.5);
-    }
-    50% { 
-        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-    }
-    75% { 
-        transform: rotateX(-5deg) rotateY(-5deg) rotateZ(-10deg);
-        box-shadow: 
-            0 15px 25px rgba(255, 0, 0, 0.4),
-            inset 0 5px 15px rgba(255, 255, 255, 0.5);
-    }
-}
-
-@keyframes clapper {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(5px); }
-}
-
-.bell .shine {
+.bell-tower:before {
+    content: '';
     position: absolute;
-    width: 30px;
+    top: -20px;
+    left: -15px;
+    width: 50px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    top: 15px;
-    left: 15px;
-    transform: rotate(45deg);
+    background: linear-gradient(to bottom, 
+        #D2691E 0%,
+        #A0522D 50%,
+        #8B4513 100%
+    );
+    border-radius: 10px 10px 0 0;
+    box-shadow: 
+        inset 0 -5px 10px rgba(0, 0, 0, 0.3),
+        0 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Ripple effect for bell */
-.ripple-effect {
+.bell-tower:after {
+    content: '';
     position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 3px solid rgba(255, 0, 0, 0.5);
+    top: -25px;
+    left: -5px;
+    width: 30px;
+    height: 10px;
+    background: #8B4513;
+    border-radius: 5px;
+}
+
+/* Bell Support Beam */
+.bell-support {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 15px;
+    background: linear-gradient(to bottom,
+        #A0522D 0%,
+        #8B4513 30%,
+        #654321 100%
+    );
+    border-radius: 10px;
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    z-index: 0;
+}
+
+/* Bell Main Assembly */
+.bell-assembly {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform-origin: center 50px;
+    animation: bellSwing 6s infinite ease-in-out;
+}
+
+/* Bell Yoke (the wooden beam that holds the bell) */
+.bell-yoke {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 30px;
+    background: linear-gradient(to right,
+        #8B4513 0%,
+        #A0522D 50%,
+        #8B4513 100%
+    );
+    border-radius: 15px;
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.4),
+        inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    z-index: 2;
+}
+
+.bell-yoke:before,
+.bell-yoke:after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(to bottom,
+        #D2691E 0%,
+        #8B4513 100%
+    );
     border-radius: 50%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.bell-yoke:before {
+    left: -20px;
+}
+
+.bell-yoke:after {
+    right: -20px;
+}
+
+/* Bell Body - Cast Bronze Look */
+.bell-body {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 200px;
+    background: linear-gradient(
+        145deg,
+        #CD7F32 0%,     /* Bronze base */
+        #B87333 20%,    /* Darker bronze */
+        #8B4513 50%,    /* Dark bronze shadow */
+        #D2691E 80%,    /* Bronze highlight */
+        #CD7F32 100%    /* Bronze base */
+    );
+    border-radius: 50% 50% 40% 40%;
+    transform-style: preserve-3d;
+    overflow: hidden;
+    box-shadow: 
+        inset 0 -30px 50px rgba(0, 0, 0, 0.7),
+        inset 0 20px 40px rgba(255, 215, 0, 0.2),
+        0 25px 50px rgba(0, 0, 0, 0.5);
+    border: 2px solid #8B4513;
+}
+
+/* Bell Rim - Thick bronze edge */
+.bell-rim {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 35px;
+    background: linear-gradient(to bottom,
+        #D2691E 0%,
+        #8B4513 30%,
+        #654321 70%,
+        #8B4513 100%
+    );
+    border-radius: 50%;
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.6),
+        inset 0 5px 15px rgba(255, 215, 0, 0.3);
+    z-index: 3;
+}
+
+.bell-rim:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    height: 25px;
+    background: linear-gradient(to bottom,
+        rgba(255, 215, 0, 0.4) 0%,
+        rgba(139, 69, 19, 0.8) 100%
+    );
+    border-radius: 50%;
+}
+
+/* Bell Crown/Canopy */
+.bell-crown {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 40px;
+    background: linear-gradient(to bottom,
+        #A0522D 0%,
+        #8B4513 50%,
+        #654321 100%
+    );
+    border-radius: 10px 10px 0 0;
+    box-shadow: 
+        0 10px 20px rgba(0, 0, 0, 0.4),
+        inset 0 -5px 10px rgba(0, 0, 0, 0.3);
+    z-index: 4;
+}
+
+.bell-crown:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    height: 10px;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Clapper Assembly */
+.clapper-assembly {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 160px;
+    z-index: 5;
+}
+
+.clapper-chain {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 50px;
+    background: linear-gradient(to bottom,
+        #C0C0C0 0%,
+        #A0A0A0 30%,
+        #808080 70%,
+        #606060 100%
+    );
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.clapper {
+    position: absolute;
+    top: 50px;
+    left: -15px;
+    width: 40px;
+    height: 80px;
+    background: radial-gradient(
+        circle at 30% 30%,
+        #FFD700 0%,
+        #DAA520 20%,
+        #B8860B 50%,
+        #8B6508 80%,
+        #654321 100%
+    );
+    border-radius: 50% 50% 40% 40%;
+    animation: clapperSwing 3s infinite ease-in-out;
+    transform-origin: center 10px;
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.5),
+        inset 0 5px 15px rgba(255, 255, 255, 0.4);
+    border: 2px solid #B8860B;
+}
+
+.clapper:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 35px;
+    background: radial-gradient(
+        circle at 50% 50%,
+        #FFD700 0%,
+        #DAA520 50%,
+        #B8860B 100%
+    );
+    border-radius: 50%;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.clapper:after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 15px;
+    background: linear-gradient(to bottom,
+        #B8860B 0%,
+        #8B6508 100%
+    );
+    border-radius: 50%;
+}
+
+/* Bell Details - Ornamentation */
+.bell-detail-1 {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 10px;
+    background: linear-gradient(to right,
+        transparent 0%,
+        #FFD700 20%,
+        #DAA520 50%,
+        #FFD700 80%,
+        transparent 100%
+    );
+    border-radius: 5px;
+    opacity: 0.7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.bell-detail-2 {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 8px;
+    background: linear-gradient(to right,
+        transparent 0%,
+        #DAA520 20%,
+        #B8860B 50%,
+        #DAA520 80%,
+        transparent 100%
+    );
+    border-radius: 4px;
+    opacity: 0.6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.bell-detail-3 {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 12px;
+    background: linear-gradient(to right,
+        transparent 0%,
+        #CD7F32 20%,
+        #8B4513 50%,
+        #CD7F32 80%,
+        transparent 100%
+    );
+    border-radius: 6px;
+    opacity: 0.8;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Bell Patina (weathering effects) */
+.bell-patinas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.patina-1 {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    width: 40px;
+    height: 60px;
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(0, 100, 0, 0.3) 0%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    filter: blur(5px);
+}
+
+.patina-2 {
+    position: absolute;
+    top: 100px;
+    right: 30px;
+    width: 50px;
+    height: 40px;
+    background: radial-gradient(
+        circle at 70% 50%,
+        rgba(0, 50, 100, 0.4) 0%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    filter: blur(4px);
+}
+
+.patina-3 {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    width: 60px;
+    height: 30px;
+    background: radial-gradient(
+        circle at 30% 70%,
+        rgba(50, 50, 0, 0.3) 0%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    filter: blur(3px);
+}
+
+/* Bell Shine/Highlights */
+.bell-shine {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    width: 40px;
+    height: 80px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    transform: rotate(30deg);
+    filter: blur(2px);
+    z-index: 1;
+}
+
+.bell-highlight {
+    position: absolute;
+    top: 80px;
+    right: 40px;
+    width: 30px;
+    height: 60px;
+    background: linear-gradient(
+        225deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    transform: rotate(-20deg);
+    filter: blur(1px);
+    z-index: 1;
+}
+
+/* Bell Shadow */
+.bell-shadow {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 40px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0) 70%
+    );
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Sound Waves */
+.sound-wave {
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: ripple 1s ease-out;
+    border: 2px solid rgba(205, 127, 50, 0.3);
+    border-radius: 50%;
+    animation: soundWave 2s ease-out infinite;
     pointer-events: none;
+    z-index: -1;
 }
 
-@keyframes ripple {
+.sound-wave:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.sound-wave:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+/* ========== ANIMATIONS ========== */
+
+/* Bell swinging with pendulum physics */
+@keyframes bellSwing {
+    0%, 100% { 
+        transform: translateX(-50%) rotateZ(0deg);
+    }
+    25% { 
+        transform: translateX(-50%) rotateZ(5deg);
+    }
+    50% { 
+        transform: translateX(-50%) rotateZ(0deg);
+    }
+    75% { 
+        transform: translateX(-50%) rotateZ(-5deg);
+    }
+}
+
+/* Clapper swinging (opposite direction for realism) */
+@keyframes clapperSwing {
+    0%, 100% { 
+        transform: rotate(0deg);
+    }
+    25% { 
+        transform: rotate(-10deg);
+    }
+    50% { 
+        transform: rotate(0deg);
+    }
+    75% { 
+        transform: rotate(10deg);
+    }
+}
+
+/* Intensive ringing animation */
+@keyframes intensiveRing {
+    0% { transform: translateX(-50%) rotateZ(0deg); }
+    10% { transform: translateX(-50%) rotateZ(20deg); }
+    20% { transform: translateX(-50%) rotateZ(-18deg); }
+    30% { transform: translateX(-50%) rotateZ(16deg); }
+    40% { transform: translateX(-50%) rotateZ(-14deg); }
+    50% { transform: translateX(-50%) rotateZ(12deg); }
+    60% { transform: translateX(-50%) rotateZ(-10deg); }
+    70% { transform: translateX(-50%) rotateZ(8deg); }
+    80% { transform: translateX(-50%) rotateZ(-6deg); }
+    90% { transform: translateX(-50%) rotateZ(4deg); }
+    100% { transform: translateX(-50%) rotateZ(0deg); }
+}
+
+/* Clapper hit animation */
+@keyframes clapperHit {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+/* Sound wave animation */
+@keyframes soundWave {
     0% {
         width: 0;
         height: 0;
-        opacity: 1;
+        opacity: 0.8;
+        border-width: 3px;
     }
     100% {
-        width: 150px;
-        height: 150px;
+        width: 300px;
+        height: 300px;
         opacity: 0;
+        border-width: 1px;
     }
 }
 
-/* Bell instruction text */
+/* Vibration effect */
+@keyframes vibrate {
+    0%, 100% { transform: translateX(-50%) translateX(0); }
+    25% { transform: translateX(-50%) translateX(-1px); }
+    75% { transform: translateX(-50%) translateX(1px); }
+}
+
+/* ========== INTERACTIVE STATES ========== */
+.bell-assembly.ringing {
+    animation: intensiveRing 1.5s ease-in-out !important;
+}
+
+.bell-assembly.vibrating {
+    animation: vibrate 0.1s linear 15 !important;
+}
+
+.clapper.hitting {
+    animation: clapperHit 0.3s ease-in-out !important;
+}
+
+.bell-scene.active {
+    filter: drop-shadow(0 25px 40px rgba(205, 127, 50, 0.4));
+}
+
+/* Bell Instruction */
 .bell-instruction {
     text-align: center;
-    margin-top: 1rem;
-    font-style: italic;
-    color: var(--gray-dark);
-    animation: pulse 2s infinite;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #333;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: gentleGlow 4s infinite ease-in-out;
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 1; }
+@keyframes gentleGlow {
+    0%, 100% { 
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.02);
+        color: #8B4513;
+    }
 }
 
-/* Active bell state */
-.bell.ringing {
-    box-shadow: 
-        0 0 30px rgba(255, 0, 0, 0.7),
-        0 10px 20px rgba(255, 0, 0, 0.3),
-        inset 0 5px 15px rgba(255, 255, 255, 0.5);
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bell-scene {
+        width: 250px;
+        height: 350px;
+        margin: 3rem auto;
+    }
+    
+    .bell-body {
+        width: 120px;
+        height: 160px;
+    }
+    
+    .bell-rim {
+        width: 130px;
+    }
+    
+    .bell-support {
+        width: 180px;
+    }
 }
-
 .countdown {
     margin: 3rem 0;
     text-align: center;
