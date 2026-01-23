@@ -188,47 +188,89 @@ p {
 
 .bell-container {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     margin: 2rem auto;
+    perspective: 1000px;
 }
 
 .bell {
-    width: 60px;
-    height: 60px;
-    background-color: var(--red);
-    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(145deg, #ff0000, #cc0000); /* Red gradient */
+    border-radius: 50% 50% 40% 40%;
     position: relative;
     margin: 0 auto;
-    animation: ring 3s infinite;
+    animation: ring3d 3s infinite ease-in-out;
     cursor: pointer;
+    box-shadow: 
+        0 10px 20px rgba(255, 0, 0, 0.3),
+        inset 0 5px 15px rgba(255, 255, 255, 0.4),
+        inset 0 -5px 15px rgba(0, 0, 0, 0.4);
+    transform-style: preserve-3d;
+    perspective: 500px;
 }
 
 .bell:before {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 30px;
-    background-color: var(--red);
-    top: -30px;
-    left: 20px;
+    width: 15px;
+    height: 25px;
+    background: linear-gradient(to bottom, #8B0000, #660000);
+    top: -25px;
+    left: 32.5px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .bell:after {
     content: '';
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: var(--gold);
-    border-radius: 50%;
-    top: 15px;
-    left: 25px;
+    width: 20px;
+    height: 30px;
+    background: linear-gradient(to bottom, #FFD700, #DAA520);
+    border-radius: 10px;
+    top: 30px;
+    left: 30px;
+    animation: clapper 1s infinite alternate ease-in-out;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes ring {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(10deg); }
-    75% { transform: rotate(-10deg); }
+@keyframes ring3d {
+    0%, 100% { 
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); 
+    }
+    25% { 
+        transform: rotateX(5deg) rotateY(5deg) rotateZ(10deg);
+        box-shadow: 
+            0 15px 25px rgba(255, 0, 0, 0.4),
+            inset 0 5px 15px rgba(255, 255, 255, 0.5);
+    }
+    50% { 
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    75% { 
+        transform: rotateX(-5deg) rotateY(-5deg) rotateZ(-10deg);
+        box-shadow: 
+            0 15px 25px rgba(255, 0, 0, 0.4),
+            inset 0 5px 15px rgba(255, 255, 255, 0.5);
+    }
+}
+
+@keyframes clapper {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(5px); }
+}
+
+.bell .shine {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    top: 15px;
+    left: 15px;
+    transform: rotate(45deg);
 }
 
 .countdown {
