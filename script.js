@@ -12,48 +12,12 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     }
 });
 
-// Mobile menu toggle - FIXED VERSION
-const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const navLinks = document.querySelector('.nav-links');
-
-if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', function(e) {
-        e.stopPropagation(); // Prevent event from bubbling up
-        navLinks.classList.toggle('active');
-        
-        // Change icon based on state
-        if (navLinks.classList.contains('active')) {
-            this.innerHTML = '<i class="fas fa-times"></i>';
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
-        } else {
-            this.innerHTML = '<i class="fas fa-bars"></i>';
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
-    });
-}
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.nav-container') && navLinks?.classList.contains('active')) {
-        navLinks.classList.remove('active');
-        if (mobileMenuBtn) {
-            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-        }
-        document.body.style.overflow = 'auto'; // Restore scrolling
-    }
-});
-
-// Close mobile menu when clicking a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', function() {
-        if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-            document.body.style.overflow = 'auto'; // Restore scrolling
-        }
-    });
+// Mobile menu toggle
+mobileMenuBtn?.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
 });
 
 // Navbar scroll effect
@@ -62,6 +26,14 @@ window.addEventListener('scroll', () => {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
+    }
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-container') && navLinks?.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
     }
 });
 
