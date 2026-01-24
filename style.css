@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelector('.nav-links');
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
-    // Debug info
-    console.log('Script loaded - Debug Info:');
-    console.log('Mobile button found:', !!mobileMenuBtn);
-    console.log('Nav links found:', !!navLinks);
+    // Create overlay element for mobile menu
+    const overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    document.body.appendChild(overlay);
     
     // Set active nav link
     if (navLinks) {
@@ -22,24 +22,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Mobile menu toggle - SIMPLE FIXED VERSION
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+    // Mobile menu toggle function
+    function toggleMobileMenu() {
+        if (navLinks) {
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
             
-            console.log('Menu button clicked!');
-            
-            // Toggle active class on nav links
-            if (navLinks) {
-                navLinks.classList.toggle('active');
-            }
-            
-            // Toggle body class to prevent scrolling
-            document.body.classList.toggle('menu-open');
-            
-            // Change icon
-            const icon = this.querySelector('i');
+            // Change menu icon
+            const icon = mobileMenuBtn.querySelector('i');
             if (icon) {
                 if (navLinks.classList.contains('active')) {
                     icon.classList.remove('fa-bars');
@@ -49,41 +40,36 @@ document.addEventListener('DOMContentLoaded', function() {
                     icon.classList.add('fa-bars');
                 }
             }
+        }
+    }
+    
+    // Mobile menu button click event
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMobileMenu();
         });
     }
+    
+    // Close menu when clicking overlay
+    overlay.addEventListener('click', function() {
+        toggleMobileMenu();
+    });
     
     // Close menu when clicking a link
     if (navLinks) {
         navLinks.addEventListener('click', function(e) {
             if (e.target.tagName === 'A') {
-                this.classList.remove('active');
-                document.body.classList.remove('menu-open');
-                
-                const icon = mobileMenuBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
+                // Only close menu on mobile
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        toggleMobileMenu();
+                    }, 300);
                 }
             }
         });
     }
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.nav-container') && 
-            navLinks && 
-            navLinks.classList.contains('active')) {
-            
-            navLinks.classList.remove('active');
-            document.body.classList.remove('menu-open');
-            
-            const icon = mobileMenuBtn.querySelector('i');
-            if (icon) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        }
-    });
     
     // Navbar scroll effect
     window.addEventListener('scroll', function() {
@@ -93,6 +79,13 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 navbar.classList.remove('scrolled');
             }
+        }
+    });
+    
+    // Close menu on window resize (if resizing from mobile to desktop)
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navLinks && navLinks.classList.contains('active')) {
+            toggleMobileMenu();
         }
     });
     
@@ -138,6 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 this.style.animation = 'ring 0.5s ease';
                 // Optional: Add bell sound here
+                const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-school-bell-789.mp3');
+                audio.play().catch(e => console.log('Audio play failed:', e));
             }, 10);
         });
     }
